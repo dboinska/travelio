@@ -31,7 +31,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="price-label" >$</span>
         </div>
-        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" value="<%=hotel.price %>" required>
+        <input type="text" class="form-control" name="hotel[price]" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" value="<%=hotel.price %>" required>
         <div class="valid-feedback">
             correctly completed
         </div>
@@ -44,7 +44,7 @@
             correctly completed
         </div>
       </div>
-      <div class="mb-3"><button class="btn btn-info">Update Hotel</button></div>
+      <div class="mb-3"><button class="btn btn-info" type="submit">Update Hotel</button></div>
     </form>
    
     <a href="/hotels/<%= hotel._id%>">Back To Hotel</a>

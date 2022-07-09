@@ -2,18 +2,20 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
-const Joi = require("joi");
-const { hotelSchema, reviewSchema } = require("./validationSchemas");
-const catchAsync = require("./utils/catchAsync");
+
+const session = require("express-session");
+const flash = require("connect-flash");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
-const Hotel = require("./models/hotels");
-const Review = require("./models/review");
+
+const hotels = require("./routes/hotels");
+const reviews = require("./routes/reviews");
 
 mongoose.connect("mongodb://127.0.0.1:27017/travelio", {
   useNewUrlParser: true,
   //   useCreateIndex: true,
   useUnifiedTopology: true,
+  // useFIndAndModify: false,
 });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -28,36 +30,27 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "public")));
 
-const validateHotel = (req, res, next) => {
-  const { error } = hotelSchema.validate(req.body);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
+const sessionConfig = {
+  secret: "ddsfdsf",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
 };
 
-const validateReview = (req, res, next) => {
-  console.log(req.body);
-  const { error } = reviewSchema.validate(req.body);
-  console.log(error);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
+app.use(session(sessionConfig));
+app.use(flash());
 
-const verifyPassword = (req, res, next) => {
-  const { password } = req.query;
-  if (password === "premiumHotel") {
-    next();
-  }
-  res.send("you need a password");
-};
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 const useReqTime = (req, res, next) => {
   req.requestTime = new Date();
@@ -66,104 +59,12 @@ const useReqTime = (req, res, next) => {
 
 app.use(useReqTime);
 
+app.use("/hotels", hotels);
+app.use("/hotels/:id/reviews", reviews);
+
 app.get("/", (req, res) => {
   res.render("home");
 });
-
-app.get("/premiumHotel", (req, res) => {
-  console.log(req);
-  console.log(`request date: ${req.requestTime}`);
-  res.send("access");
-});
-
-app.get("/secret", verifyPassword, (req, res) => {
-  res.send("my secret is:secret");
-});
-app.get(
-  "/hotels",
-  catchAsync(async (req, res) => {
-    const hotels = await Hotel.find({});
-    res.render("hotels/index", { hotels });
-  })
-);
-
-app.get("/hotels/new", (req, res) => {
-  res.render("hotels/new");
-});
-
-app.post(
-  "/hotels",
-  validateHotel,
-  catchAsync(async (req, res, next) => {
-    const hotel = new Hotel(req.body.hotel);
-    await hotel.save();
-    res.redirect(`/hotels/${hotel._id}`);
-  })
-);
-
-app.get(
-  "/hotels/:id",
-  catchAsync(async (req, res) => {
-    const hotel = await Hotel.findById(req.params.id).populate("reviews");
-    console.log(hotel);
-    res.render("hotels/show", { hotel });
-  })
-);
-
-app.get(
-  "/hotels/:id/edit",
-  catchAsync(async (req, res) => {
-    const hotel = await Hotel.findById(req.params.id);
-    res.render("hotels/edit", { hotel });
-  })
-);
-
-app.put(
-  "/hotels/:id",
-  validateHotel,
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    if (id.match(/^[0-9a-fA-F]{24}$/)) {
-      // Yes, it's a valid ObjectId, proceed with `findById` call.
-      const hotel = await Hotel.findByIdAndUpdate(id, {
-        ...req.body.hotel,
-      });
-      res.redirect(`/hotels/${hotel._id}`);
-    }
-  })
-);
-
-app.delete(
-  "/hotels/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    await Hotel.findByIdAndDelete(id);
-    res.redirect("/hotels");
-  })
-);
-
-app.post(
-  "/hotels/:id/reviews",
-  validateReview,
-  catchAsync(async (req, res) => {
-    const hotel = await Hotel.findById(req.params.id);
-    const review = new Review(req.body.review);
-    hotel.reviews.push(review);
-    await review.save();
-    await hotel.save();
-    res.redirect(`/hotels/${hotel._id}`);
-  })
-);
-
-app.delete(
-  "/hotels/:id/reviews/:reviewId",
-  catchAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-    Hotel.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/hotels/${id}`);
-  })
-);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page not found", 404));
