@@ -2,18 +2,27 @@
    <div class="row">
     <h1 class="text-center">New Hotel</h1>
     <div class="col-6 offset-3">
-          <form action="/hotels" method="POST">
+          <form action="/hotels" method="POST" novalidate class="validated-form">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
-        <input  class="form-control"  for="text" id="title" name="hotel[title]"></input>
+        <input  class="form-control"  for="text" id="title" name="hotel[title]" required required></input>
+        <div class="valid-feedback">
+            correctly completed
+        </div>
       </div>
       <div class="mb-3">
         <label class="form-label"  for="location">Location</label>
-        <input  class="form-control"  for="text" id="location" name="hotel[location]"></input>
+        <input  class="form-control"  for="text" id="location" name="hotel[location]" required></input>
+         <div class="valid-feedback">
+            correctly completed
+        </div>
       </div>
        <div class="mb-3">
         <label class="form-label"  for="image">Image Url</label>
-        <input  class="form-control"  for="text" id="image" name="hotel[image]"></input>
+        <input  class="form-control"  for="text" id="image" name="hotel[image]" required></input>
+         <div class="valid-feedback">
+            correctly completed
+        </div>
       </div>
       <div class="mb-3">
         
@@ -22,12 +31,18 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="price-label">$</span>
         </div>
-        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label">
+        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" required>
+         <div class="valid-feedback">
+            correctly completed
+        </div>
       </div>
       </div>
         <div class="mb-3">
         <label class="form-label"  for="description">Desription</label>
-        <textarea  class="form-control"  for="text" id="description" name="hotel[description]"></textarea>
+        <textarea  class="form-control"  for="text" id="description" name="hotel[description]" required></textarea>
+         <div class="valid-feedback">
+            correctly completed
+        </div>
       </div>
       <div class="mb-3"><button class="btn btn-success">Add Hotel</button></div>
     </form>
