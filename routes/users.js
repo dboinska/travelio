@@ -40,6 +40,7 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", "welcome back");
+    delete req.session.returnTo;
     res.redirect("/hotels");
   }
 );

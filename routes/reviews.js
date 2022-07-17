@@ -1,30 +1,23 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-const { reviewSchema } = require("../validationSchemas.js");
 
 const catchAsync = require("../utils/catchAsync");
-const ExpressError = require("../utils/ExpressError");
-const Hotel = require("../models/hotels");
+const Hotel = require("../models/hotel");
 const Review = require("../models/review");
-
-const validateReview = (req, res, next) => {
-  console.log(req.body);
-  const { error } = reviewSchema.validate(req.body);
-  console.log(error);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
+const {
+  validateReview,
+  isLoggedIn,
+  verifyReviewAuthor,
+} = require("../middleware");
 
 router.post(
   "/",
+  isLoggedIn,
   validateReview,
   catchAsync(async (req, res) => {
     const hotel = await Hotel.findById(req.params.id);
     const review = new Review(req.body.review);
+    review.author = req.user._id;
     hotel.reviews.push(review);
     await review.save();
     await hotel.save();
@@ -35,8 +28,11 @@ router.post(
 
 router.delete(
   "/:reviewId",
+  isLoggedIn,
+  verifyReviewAuthor,
   catchAsync(async (req, res) => {
     const { id, reviewId } = req.params;
+    console.log({ id, reviewId });
     Hotel.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
     req.flash("success", "Successfully deleted review");
