@@ -1,32 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { hotelSchema } = require("../validationSchemas.js");
 
 const catchAsync = require("../utils/catchAsync");
-const { isLoggedIn } = require("../middleware");
+const {
+  isLoggedIn,
+  validateHotel,
+  verifyAuthor,
+  verifyPassword,
+} = require("../middleware");
 const flash = require("connect-flash");
-const ExpressError = require("../utils/ExpressError");
-const Hotel = require("../models/hotels");
+const Hotel = require("../models/hotel");
 const Review = require("../models/review");
-
-const validateHotel = (req, res, next) => {
-  console.log(req.body);
-  const { error } = hotelSchema.validate(req.body.hotel);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
-
-const verifyPassword = (req, res, next) => {
-  const { password } = req.query;
-  if (password === "premiumHotel") {
-    next();
-  }
-  res.send("you need a password");
-};
 
 router.get("/premiumHotel", (req, res) => {
   console.log(req);
@@ -55,6 +39,7 @@ router.post(
   validateHotel,
   catchAsync(async (req, res, next) => {
     const hotel = new Hotel(req.body.hotel);
+    hotel.author = req.user._id;
     await hotel.save();
     req.flash("success", "Successfully made a new hotel");
     res.redirect(`/hotels/${hotel._id}`);
@@ -64,7 +49,10 @@ router.post(
 router.get(
   "/:id",
   catchAsync(async (req, res) => {
-    const hotel = await Hotel.findById(req.params.id).populate("reviews");
+    const hotel = await Hotel.findById(req.params.id)
+      .populate({ path: "reviews", populate: { path: "author" } })
+      .populate("author");
+    console.log(hotel);
     if (!hotel) {
       req.flash("error", "Cannot find that hotel");
       return res.redirect("/hotels");
@@ -76,6 +64,7 @@ router.get(
 router.get(
   "/:id/edit",
   isLoggedIn,
+  verifyAuthor,
   catchAsync(async (req, res) => {
     const hotel = await Hotel.findById(req.params.id);
     if (!hotel) {
@@ -89,13 +78,13 @@ router.get(
 router.put(
   "/:id",
   isLoggedIn,
+  verifyAuthor,
   validateHotel,
   catchAsync(async (req, res) => {
-    console.log(req, res);
     const { id } = req.params;
-    const hotel = await Hotel.findByIdAndUpdate(id, {
-      ...req.body.hotel,
-    });
+    // const updatedHotel = await Hotel.findByIdAndUpdate(id, {
+    //   ...req.body.hotel,
+    // });
     req.flash("success", "Successfully updated hotel");
     res.redirect(`/hotels/${hotel._id}`);
   })
@@ -104,6 +93,7 @@ router.put(
 router.delete(
   "/:id",
   isLoggedIn,
+  verifyAuthor,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Hotel.findByIdAndDelete(id);

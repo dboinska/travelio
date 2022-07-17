@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const cities = require("./cities");
 const { places, descriptors } = require("./seedHelpers");
-const Hotel = require("../models/hotels");
+const Hotel = require("../models/hotel");
 
 mongoose.connect("mongodb://127.0.0.1:27017/travelio", {
   useNewUrlParser: true,
@@ -22,7 +22,8 @@ const seedDB = async () => {
   for (let i = 0; i < 74; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
     const price = Math.floor(Math.random() * 20) + 10;
-    const camp = new Hotel({
+    const hotel = new Hotel({
+      author: "62cf47c9a8dd4d997c7b2813",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
       image: "https://source.unsplash.com/collection/4977823/hotel",
@@ -30,7 +31,7 @@ const seedDB = async () => {
         "Aliquam faucibus sit amet eros eget sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ultricies suscipit magna eu imperdiet. Proin blandit luctus nibh.",
       price,
     });
-    await camp.save();
+    await hotel.save();
   }
 };
 
