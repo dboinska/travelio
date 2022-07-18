@@ -1,6 +1,7 @@
 const ExpressError = require("./utils/ExpressError");
 const { hotelSchema, reviewSchema } = require("./validationSchemas.js");
 const Review = require("./models/review");
+const Hotel = require("./models/hotel");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
