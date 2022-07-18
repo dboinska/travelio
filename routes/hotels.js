@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const hotels = require("../controllers/hotels");
+
 const catchAsync = require("../utils/catchAsync");
 const {
   isLoggedIn,
@@ -21,85 +23,24 @@ router.get("/premiumHotel", (req, res) => {
 router.get("/secret", verifyPassword, (req, res) => {
   res.send("my secret is:secret");
 });
-router.get(
-  "/",
-  catchAsync(async (req, res) => {
-    const hotels = await Hotel.find({});
-    res.render("hotels/index", { hotels });
-  })
-);
+router.get("/", catchAsync(hotels.index));
 
-router.get("/new", isLoggedIn, (req, res) => {
-  res.render("hotels/new");
-});
+router.get("/new", isLoggedIn, hotels.newForm);
 
-router.post(
-  "/",
-  isLoggedIn,
-  validateHotel,
-  catchAsync(async (req, res, next) => {
-    const hotel = new Hotel(req.body.hotel);
-    hotel.author = req.user._id;
-    await hotel.save();
-    req.flash("success", "Successfully made a new hotel");
-    res.redirect(`/hotels/${hotel._id}`);
-  })
-);
+router.post("/", isLoggedIn, validateHotel, catchAsync(hotels.createNewHotel));
 
-router.get(
-  "/:id",
-  catchAsync(async (req, res) => {
-    const hotel = await Hotel.findById(req.params.id)
-      .populate({ path: "reviews", populate: { path: "author" } })
-      .populate("author");
-    console.log(hotel);
-    if (!hotel) {
-      req.flash("error", "Cannot find that hotel");
-      return res.redirect("/hotels");
-    }
-    res.render("hotels/show", { hotel });
-  })
-);
+router.get("/:id", catchAsync(hotels.showHotel));
 
-router.get(
-  "/:id/edit",
-  isLoggedIn,
-  verifyAuthor,
-  catchAsync(async (req, res) => {
-    const hotel = await Hotel.findById(req.params.id);
-    if (!hotel) {
-      req.flash("error", "Cannot find that hotel");
-      return res.redirect("/hotels");
-    }
-    res.render("hotels/edit", { hotel });
-  })
-);
+router.get("/:id/edit", isLoggedIn, verifyAuthor, catchAsync(hotels.editHotel));
 
 router.put(
   "/:id",
   isLoggedIn,
   verifyAuthor,
   validateHotel,
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    // const updatedHotel = await Hotel.findByIdAndUpdate(id, {
-    //   ...req.body.hotel,
-    // });
-    req.flash("success", "Successfully updated hotel");
-    res.redirect(`/hotels/${hotel._id}`);
-  })
+  catchAsync(hotels.showEditHotel)
 );
 
-router.delete(
-  "/:id",
-  isLoggedIn,
-  verifyAuthor,
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    await Hotel.findByIdAndDelete(id);
-    req.flash("success", "Successfully deleted hotel");
-    res.redirect("/hotels");
-  })
-);
+router.delete("/:id", isLoggedIn, verifyAuthor, catchAsync(hotels.deleteHotel));
 
 module.exports = router;
