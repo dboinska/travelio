@@ -3,8 +3,6 @@ const router = express.Router({ mergeParams: true });
 
 const catchAsync = require("../utils/catchAsync");
 const reviews = require("../controllers/reviews");
-const Hotel = require("../models/hotel");
-const Review = require("../models/review");
 const {
   validateReview,
   isLoggedIn,

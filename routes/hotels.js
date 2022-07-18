@@ -10,9 +10,8 @@ const {
   verifyAuthor,
   verifyPassword,
 } = require("../middleware");
-const flash = require("connect-flash");
+
 const Hotel = require("../models/hotel");
-const Review = require("../models/review");
 
 router.get("/premiumHotel", (req, res) => {
   console.log(req);
@@ -23,24 +22,27 @@ router.get("/premiumHotel", (req, res) => {
 router.get("/secret", verifyPassword, (req, res) => {
   res.send("my secret is:secret");
 });
-router.get("/", catchAsync(hotels.index));
+
+router
+  .route("/")
+  .get(catchAsync(hotels.index))
+  .post(isLoggedIn, validateHotel, catchAsync(hotels.createNewHotel));
 
 router.get("/new", isLoggedIn, hotels.newForm);
 
-router.post("/", isLoggedIn, validateHotel, catchAsync(hotels.createNewHotel));
+router
+  .route("/:id")
+  .get(catchAsync(hotels.showHotel))
+  .put(
+    isLoggedIn,
+    verifyAuthor,
+    validateHotel,
+    catchAsync(hotels.showEditHotel)
+  )
+  .delete(isLoggedIn, verifyAuthor, catchAsync(hotels.deleteHotel));
 
-router.get("/:id", catchAsync(hotels.showHotel));
-
-router.get("/:id/edit", isLoggedIn, verifyAuthor, catchAsync(hotels.editHotel));
-
-router.put(
-  "/:id",
-  isLoggedIn,
-  verifyAuthor,
-  validateHotel,
-  catchAsync(hotels.showEditHotel)
-);
-
-router.delete("/:id", isLoggedIn, verifyAuthor, catchAsync(hotels.deleteHotel));
+router
+  .route("/:id/edit")
+  .get(isLoggedIn, verifyAuthor, catchAsync(hotels.editHotel));
 
 module.exports = router;

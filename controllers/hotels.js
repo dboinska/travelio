@@ -1,4 +1,5 @@
 const Hotel = require("../models/hotel");
+
 module.exports.index = async (req, res) => {
   const hotels = await Hotel.find({});
   res.render("hotels/index", { hotels });
@@ -39,9 +40,9 @@ module.exports.editHotel = async (req, res) => {
 
 module.exports.showEditHotel = async (req, res) => {
   const { id } = req.params;
-  // const updatedHotel = await Hotel.findByIdAndUpdate(id, {
-  //   ...req.body.hotel,
-  // });
+  const hotel = await Hotel.findByIdAndUpdate(id, {
+    ...req.body.hotel,
+  });
   req.flash("success", "Successfully updated hotel");
   res.redirect(`/hotels/${hotel._id}`);
 };
