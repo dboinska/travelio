@@ -28,15 +28,20 @@ router.get("/secret", verifyPassword, (req, res) => {
 router
   .route("/")
   .get(catchAsync(hotels.index))
-  // .post(isLoggedIn, validateHotel, catchAsync(hotels.createNewHotel))
-  .post(upload.array("image"), (req, res) => {
-    // res.send(req.body, req.file);
+  .post(
+    isLoggedIn,
+    upload.array("image"),
+    validateHotel,
+    catchAsync(hotels.createNewHotel)
+  );
+// .post(upload.array("image"), (req, res) => {
+//   // res.send(req.body, req.file);
 
-    console.log(req.body);
-    console.log(req.files);
-    res.status(200).send(req.files);
-    // res.send("it worked");
-  });
+//   console.log(req.body);
+//   console.log(req.files);
+//   res.status(200).send(req.files);
+//   // res.send("it worked");
+// });
 
 router.get("/new", isLoggedIn, hotels.newForm);
 

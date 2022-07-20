@@ -11,8 +11,13 @@ module.exports.newForm = (req, res) => {
 
 module.exports.createNewHotel = async (req, res, next) => {
   const hotel = new Hotel(req.body.hotel);
+  hotel.images = req.files.map((file) => ({
+    url: file.path,
+    filename: file.filename,
+  }));
   hotel.author = req.user._id;
   await hotel.save();
+  console.log(hotel);
   req.flash("success", "Successfully made a new hotel");
   res.redirect(`/hotels/${hotel._id}`);
 };
