@@ -43,6 +43,15 @@
             correctly completed
         </div>
       </div>
+      <div class="mb-3">
+        <% hotel.images.forEach(function(img, i) { %>
+          <img src="<%=img.url%>" class="img-thumbnail" alt="photo">
+          <div class="form-check-inline">
+            <input type="checkbox" id="image-<%=i%>" name="deleteImgs[]" value="<%=img.filename%>">
+          </div>
+          <label for="">Delete?</label>
+       <% }) %> 
+      </div>
       <div class="mb-3"><button class="btn btn-info" type="submit">Update Hotel</button></div>
     </form>
    
