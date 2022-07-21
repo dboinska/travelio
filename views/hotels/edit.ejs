@@ -2,7 +2,7 @@
    <div class="row">
     <h1 class="text-center">Edit Hotel</h1>
     <div class="col-6 offset-3">
-         <form action="/hotels/<%=hotel._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+         <form action="/hotels/<%=hotel._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input  class="form-control"  for="text" id="title" name="hotel[title]" value="<%=hotel.title %>" required></input>
@@ -17,12 +17,11 @@
             correctly completed
         </div>
       </div>
-       <div class="mb-3">
-        <label class="form-label"  for="image">Image Url</label>
-        <input  class="form-control"  for="text" id="image" name="hotel[image]" value="<%=hotel.image %>" required></input>
-        <div class="valid-feedback">
-            correctly completed
-        </div>
+      <div class="mb-3 custom-file">
+        <input class="form-control" type="file" id="image" name="image" multiple>
+        <label for="formFileMultiple" class="form-label" for="image">
+          <p class="form-file-text custom-file-label">Add more image(s)...</p>
+        </label>
       </div>
       <div class="mb-3">
         

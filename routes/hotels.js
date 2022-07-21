@@ -51,6 +51,7 @@ router
   .put(
     isLoggedIn,
     verifyAuthor,
+    upload.array("image"),
     validateHotel,
     catchAsync(hotels.showEditHotel)
   )

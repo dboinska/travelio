@@ -3,25 +3,27 @@
 <div>
   <a href="/hotels/new">Add Hotel</a>
 </div>
-<% for (let Hotel of hotels) { %>
+<% for (let hotel of hotels) { %>
 <div class="card" mb-3>
   <div class="row">
     <div class="col-md-4">
-      <img class="img-fluid" alt="" src="<%=Hotel.image%>" />
+      <% if(hotel.images.length>0) { %>
+      <img class="img-fluid" alt="" src="<%=hotel.images[0].url%>" />
+      <% } %>
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title"><%= Hotel.title %></h5>
-        <p class="card-text"><%= Hotel.location %></p>
+        <h5 class="card-title"><%= hotel.title %></h5>
+        <p class="card-text"><%= hotel.location %></p>
         <p class="card-text">
-          <small class="text-muted"><%=Hotel.description%></small>
+          <small class="text-muted"><%=hotel.description%></small>
         </p>
-        <a class="btn btn-primary" href="/hotels/<%=Hotel._id%>"
-          >View <%=Hotel.title%></a
+        <a class="btn btn-primary" href="/hotels/<%=hotel._id%>"
+          >View <%=hotel.title%></a
         >
       </div>
       <p class="card-text">
-        <small class="text-muted"><%=Hotel.price%></small>
+        <small class="text-muted"><%=hotel.price%></small>
       </p>
     </div>
   </div>

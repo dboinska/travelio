@@ -48,6 +48,13 @@ module.exports.showEditHotel = async (req, res) => {
   const hotel = await Hotel.findByIdAndUpdate(id, {
     ...req.body.hotel,
   });
+
+  const imgs = req.files.map((file) => ({
+    url: file.path,
+    filename: file.filename,
+  }));
+  hotel.images.push(...imgs);
+  await hotel.save();
   req.flash("success", "Successfully updated hotel");
   res.redirect(`/hotels/${hotel._id}`);
 };
