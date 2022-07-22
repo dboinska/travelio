@@ -45,7 +45,7 @@
       </div>
       <div class="mb-3">
         <% hotel.images.forEach(function(img, i) { %>
-          <img src="<%=img.url%>" class="img-thumbnail" alt="photo">
+          <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="photo">
           <div class="form-check-inline">
             <input type="checkbox" id="image-<%=i%>" name="deleteImgs[]" value="<%=img.filename%>">
           </div>
@@ -59,3 +59,6 @@
     </div>
    </div>
 
+
+
+   
