@@ -29,6 +29,10 @@ const seedDB = async () => {
       description:
         "Aliquam faucibus sit amet eros eget sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ultricies suscipit magna eu imperdiet. Proin blandit luctus nibh.",
       price,
+      geometry: {
+        type: "Point",
+        coordinates: [21.027737, 52.186722],
+      },
       images: [
         {
           url: "https://res.cloudinary.com/dhnjbnqre/image/upload/v1658357337/Travelio/afjsrhc6yk6kwtiac8nt.jpg",
