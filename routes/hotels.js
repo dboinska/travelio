@@ -10,7 +10,9 @@ const {
   verifyAuthor,
   verifyPassword,
 } = require("../middleware");
-
+const multer = require("multer");
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 const Hotel = require("../models/hotel");
 
 router.get("/premiumHotel", (req, res) => {
@@ -26,7 +28,20 @@ router.get("/secret", verifyPassword, (req, res) => {
 router
   .route("/")
   .get(catchAsync(hotels.index))
-  .post(isLoggedIn, validateHotel, catchAsync(hotels.createNewHotel));
+  .post(
+    isLoggedIn,
+    upload.array("image"),
+    validateHotel,
+    catchAsync(hotels.createNewHotel)
+  );
+// .post(upload.array("image"), (req, res) => {
+//   // res.send(req.body, req.file);
+
+//   console.log(req.body);
+//   console.log(req.files);
+//   res.status(200).send(req.files);
+//   // res.send("it worked");
+// });
 
 router.get("/new", isLoggedIn, hotels.newForm);
 
@@ -36,6 +51,7 @@ router
   .put(
     isLoggedIn,
     verifyAuthor,
+    upload.array("image"),
     validateHotel,
     catchAsync(hotels.showEditHotel)
   )

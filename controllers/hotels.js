@@ -1,3 +1,4 @@
+const { cloudinary } = require("../cloudinary");
 const Hotel = require("../models/hotel");
 
 module.exports.index = async (req, res) => {
@@ -11,8 +12,13 @@ module.exports.newForm = (req, res) => {
 
 module.exports.createNewHotel = async (req, res, next) => {
   const hotel = new Hotel(req.body.hotel);
+  hotel.images = req.files.map((file) => ({
+    url: file.path,
+    filename: file.filename,
+  }));
   hotel.author = req.user._id;
   await hotel.save();
+  console.log(hotel);
   req.flash("success", "Successfully made a new hotel");
   res.redirect(`/hotels/${hotel._id}`);
 };
@@ -43,6 +49,24 @@ module.exports.showEditHotel = async (req, res) => {
   const hotel = await Hotel.findByIdAndUpdate(id, {
     ...req.body.hotel,
   });
+
+  const imgs = req.files.map((file) => ({
+    url: file.path,
+    filename: file.filename,
+  }));
+  hotel.images.push(...imgs);
+  await hotel.save();
+
+  if (req.body.deleteImgs) {
+    for (let filename of req.body.deleteImgs) {
+      cloudinary.uploader.destroy(filename);
+    }
+    await hotel.updateOne({
+      $pull: { images: { filename: { $in: req.body.deleteImgs } } },
+    });
+    console.log(hotel);
+  }
+
   req.flash("success", "Successfully updated hotel");
   res.redirect(`/hotels/${hotel._id}`);
 };

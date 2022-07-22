@@ -26,10 +26,23 @@ const seedDB = async () => {
       author: "62cf47c9a8dd4d997c7b2813",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
-      image: "https://source.unsplash.com/collection/4977823/hotel",
       description:
         "Aliquam faucibus sit amet eros eget sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ultricies suscipit magna eu imperdiet. Proin blandit luctus nibh.",
       price,
+      images: [
+        {
+          url: "https://res.cloudinary.com/dhnjbnqre/image/upload/v1658357337/Travelio/afjsrhc6yk6kwtiac8nt.jpg",
+          filename: "Travelio/afjsrhc6yk6kwtiac8nt",
+        },
+        {
+          url: "https://res.cloudinary.com/dhnjbnqre/image/upload/v1658357341/Travelio/d765cvnbm20ebmjfwpbw.jpg",
+          filename: "Travelio/d765cvnbm20ebmjfwpbw",
+        },
+        {
+          url: "https://res.cloudinary.com/dhnjbnqre/image/upload/v1658357345/Travelio/t6ryhturpyh7nj9ca7oz.jpg",
+          filename: "Travelio/t6ryhturpyh7nj9ca7oz",
+        },
+      ],
     });
     await hotel.save();
   }
