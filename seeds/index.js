@@ -19,7 +19,7 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
   await Hotel.deleteMany({});
-  for (let i = 0; i < 74; i++) {
+  for (let i = 0; i < 374; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
     const price = Math.floor(Math.random() * 20) + 10;
     const hotel = new Hotel({
@@ -31,7 +31,10 @@ const seedDB = async () => {
       price,
       geometry: {
         type: "Point",
-        coordinates: [21.027737, 52.186722],
+        coordinates: [
+          cities[random1000].longitude,
+          cities[random1000].latitude,
+        ],
       },
       images: [
         {
