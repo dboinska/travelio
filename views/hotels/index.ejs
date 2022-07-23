@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate') %>
+<div id="map" style="width: 100%; height: 500px"></div>
 <h1>All Hotels</h1>
 <div>
   <a href="/hotels/new">Add Hotel</a>
@@ -13,8 +14,12 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title"><%= hotel.title %></h5>
-        <p class="card-text"><%= hotel.location %></p>
+        <div class="d-flex row justify-content-between">
+          <h5 class="card-title w-auto"><%= hotel.title %></h5>
+          <small class="text-muted w-auto"
+            >from <strong><%=hotel.price%>$</strong> per night</small
+          >
+        </div>
         <p class="card-text">
           <small class="text-muted"><%=hotel.description%></small>
         </p>
@@ -22,10 +27,12 @@
           >View <%=hotel.title%></a
         >
       </div>
-      <p class="card-text">
-        <small class="text-muted"><%=hotel.price%></small>
-      </p>
     </div>
   </div>
 </div>
 <%}%>
+<script>
+  const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+  const hotels = {features: <%- JSON.stringify(hotels) %>};
+</script>
+<script src="/javascript/clusterMap.js"></script>

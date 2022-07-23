@@ -14,34 +14,44 @@ ImageSchema.virtual("thumbnail").get(function () {
   return this.url.replace("/upload", "/upload/w_200");
 });
 
-const HotelSchema = new Schema({
-  title: String,
-  geometry: {
-    type: {
-      type: String,
-      enum: ["Point"],
-      required: true,
-    },
-    coordinates: {
-      type: [Number],
-      required: true,
-    },
-  },
+const opts = { toJSON: { virtuals: true } };
 
-  images: [ImageSchema],
-  price: Number,
-  description: String,
-  location: String,
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  reviews: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Review",
+const HotelSchema = new Schema(
+  {
+    title: String,
+    geometry: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
     },
-  ],
+
+    images: [ImageSchema],
+    price: Number,
+    description: String,
+    location: String,
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+  },
+  opts
+);
+
+HotelSchema.virtual("properties.popUpMarkup").get(function () {
+  return `<strong><a href="/hotels/${this._id}">${this.title}</a></strong>
+  <p>${this.description.substring(0, 20)}...</p>`;
 });
 
 HotelSchema.post("findOneAndDelete", async function (doc) {
