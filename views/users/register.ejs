@@ -1,5 +1,6 @@
 <% layout('layouts/boilerplate') %>
-<h1>Register</h1>
+<div class="container container-register">
+  <h1>Register</h1>
 <form action="/register" method="POST" class="validated-form" novalidate>
     <div class="mb-3">
         <label class="form-label"  for="username">Username</label>
@@ -22,5 +23,9 @@
             correctly completed
         </div>
       </div>
-      <button class="btn btn-success">Register</button>
+     <div class="text-end">
+       <button class="btn button button-blue text-white">Register</button>
+     </div>
 </form>
+
+</div>

@@ -5,7 +5,7 @@ body {
   background-size: cover;
 }
 .vh-home-calc {
-  height: calc(100vh - 200px);
+  height: calc(100vh - 220px);
   min-height: 500px;
 }
 
@@ -23,29 +23,4 @@ h1 {
 h1 {
   -webkit-text-fill-color: white;
   margin-bottom: 3rem;
-}
-
-.gradient {
-  margin: 2rem;
-  padding: 0.6rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  --magic-rainbow-color-1: hsl(192deg, 100%, 45%);
-  --magic-rainbow-color-2: hsl(211.1, 87.6%, 38%);
-  --magic-rainbow-color-1: hsl(298, 84.6%, 59.2%);
-  background: linear-gradient(
-    170deg,
-    var(--magic-rainbow-color-1),
-    var(--magic-rainbow-color-2)
-  );
-
-  transition: --magic-rainbow-color-1 1000ms linear,
-    --magic-rainbow-color-2 1000ms linear, --magic-rainbow-color-3 1000ms linear,
-    color 0.5s ease, background 0.5s ease;
-  border: 0;
-  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.2);
-}
-
-.gradient:hover {
-  background: rgb(16, 26, 37);
 }

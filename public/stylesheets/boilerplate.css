@@ -6,7 +6,10 @@ html {
 }
 
 .navbar-brand {
-  color: var(--blue);
+  background: linear-gradient(to right, #30cfd0 0%, #0c5eb6 90%);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .nav-link {
@@ -25,4 +28,54 @@ html {
 
 .nav-link {
   margin: 0 0.2rem;
+}
+
+h1 {
+  background: linear-gradient(to right, #30cfd0 0%, #0c5eb6 10%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 4rem;
+}
+
+.container-register {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.button {
+  margin: 1rem;
+  padding: 0.6rem;
+  font-size: 1.125rem;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  border: 0;
+  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.2);
+}
+
+.gradient {
+  --magic-rainbow-color-0: hsl(192deg, 100%, 45%);
+  --magic-rainbow-color-2: hsl(211, 88%, 38%);
+  --magic-rainbow-color-1: hsl(298, 84.6%, 59.2%);
+  background: linear-gradient(
+    170deg,
+    var(--magic-rainbow-color-1),
+    var(--magic-rainbow-color-2)
+  );
+
+  transition: --magic-rainbow-color-1 1000ms linear,
+    --magic-rainbow-color-2 1000ms linear, --magic-rainbow-color-3 1000ms linear,
+    color 0.5s ease, background 0.5s ease;
+}
+
+.button-blue {
+  background-color: #03a9f4;
+}
+
+.gradient:hover,
+.button-blue:hover {
+  background: rgb(16, 26, 37);
+}
+
+.form-control {
+  padding: 0.2rem;
 }
