@@ -1,0 +1,28 @@
+body {
+  --blue: hsl(192deg, 100%, 45%);
+}
+html {
+  font-size: calc(15px + 0.390625vw);
+}
+
+.navbar-brand {
+  color: var(--blue);
+}
+
+.nav-link {
+  transition: all 0.3s ease;
+  border-bottom: 0.1rem solid transparent;
+}
+
+.nav-link:hover {
+  border-bottom-color: var(--blue);
+}
+
+.navbar-nav {
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.nav-link {
+  margin: 0 0.2rem;
+}
