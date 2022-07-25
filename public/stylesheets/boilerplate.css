@@ -1,8 +1,18 @@
 body {
-  --blue: hsl(192deg, 100%, 45%);
+  --cerulean: hsl(192, 100%, 45%);
+  --chartreuse: hsl(93, 100%, 51%);
+  --sulu: hsl(93, 86%, 67%);
+  --razzmatazz: hsl(339, 100%, 48%);
+  --brinkPink: hsl(339, 99%, 66%);
+  --mineShaft: hsl(0, 1%, 15%);
+  --white: hsl(0, 0%, 100%);
 }
 html {
   font-size: calc(15px + 0.390625vw);
+}
+
+.bg-dark {
+  background-color: #191a1a !important;
 }
 
 .navbar-brand {
@@ -17,8 +27,12 @@ html {
   border-bottom: 0.1rem solid transparent;
 }
 
+.nav-link.chartreuse-link:hover {
+  border-color: var(--chartreuse);
+}
+
 .nav-link:hover {
-  border-bottom-color: var(--blue);
+  border-bottom-color: var(--cerulean);
 }
 
 .navbar-nav {
@@ -40,6 +54,10 @@ h1 {
 .container-register {
   max-width: 800px;
   margin: 0 auto;
+  background-color: var(--white);
+  border: 2px solid var(--cerulean);
+  border-radius: calc(0.375rem - 1px);
+  padding: 2rem 3rem;
 }
 
 .button {
@@ -68,7 +86,7 @@ h1 {
 }
 
 .button-blue {
-  background-color: #03a9f4;
+  background-color: var(--cerulean);
 }
 
 .gradient:hover,
@@ -78,4 +96,25 @@ h1 {
 
 .form-control {
   padding: 0.2rem;
+}
+
+.cluster-map {
+  width: 100%;
+  height: 440px;
+}
+
+.map {
+  width: 100%;
+  height: 300px;
+}
+.alert {
+  max-width: 300px;
+  position: absolute;
+  z-index: 999;
+}
+.alert-danger {
+  background-color: var(--brinkPink);
+}
+.alert-success {
+  background-color: var(--sulu);
 }

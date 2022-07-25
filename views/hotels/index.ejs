@@ -1,38 +1,55 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/boilerplate.css" />;
+<link rel="stylesheet" href="/stylesheets/index.css" />
 <div class="fullWidth">
-  <div id="map" class="mb-5" style="width: 100%; height: 500px"></div>
+  <div id="cluster-map" class="cluster-map mb-5"></div>
 </div>
-<h1>All Hotels</h1>
-<div>
-  <a href="/hotels/new">Add Hotel</a>
+<div class="d-flex justify-content-between align-items-center">
+  <h1>All Hotels</h1>
+  <a class="text-white text-decoration-none" href="/hotels/new"
+    >Add Hotel<i class="chartreuse fa-solid fa-circle-plus fa-beat"></i
+  ></a>
 </div>
-<% for (let hotel of hotels) { %>
-<div class="card" mb-3>
-  <div class="row">
-    <div class="col-md-4">
-      <% if(hotel.images.length>0) { %>
-      <img class="img-fluid" alt="" src="<%=hotel.images[0].url%>" />
-      <% } %>
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <div class="d-flex row justify-content-between">
-          <h5 class="card-title w-auto"><%= hotel.title %></h5>
-          <small class="text-muted w-auto"
-            >from <strong><%=hotel.price%>$</strong> per night</small
-          >
+<div class="container d-flex flex-wrap justify-content-between gap-3">
+  <div class="row justify-content-center">
+    <% for (let hotel of hotels) { %>
+    <div class="card overflow-hidden">
+      <div class="d-flex flex-column align-items-center justify-content-center">
+        <div class="img-container">
+          <% if(hotel.images.length>0) { %>
+          <img class="img-fluid" alt="" src="<%=hotel.images[0].url%>" />
+          <% } %>
         </div>
-        <p class="card-text">
-          <small class="text-muted"><%=hotel.description%></small>
-        </p>
-        <a class="btn btn-primary" href="/hotels/<%=hotel._id%>"
-          >View <%=hotel.title%></a
-        >
+        <div class="col-md-8">
+          <div class="card-body">
+            <div class="d-flex row justify-content-between">
+              <h5 class="card-title w-100 text-center fw-600 fs-6">
+                <%= hotel.title %>
+              </h5>
+              <div class="stars">
+                <p class="starability-result" data-rating="5"></p>
+              </div>
+              <small class="text-muted w-100 text-center"
+                >from <strong><%=hotel.price%>$</strong> per night</small
+              >
+            </div>
+
+            <p class="card-text">
+              <!-- <small class="text-muted"><%=hotel.description%></small>
+            </p> -->
+              <a
+                class="btn btn-primary button-blue"
+                href="/hotels/<%=hotel._id%>"
+                >View <%=hotel.title%></a
+              >
+            </p>
+          </div>
+        </div>
       </div>
     </div>
+    <%}%>
   </div>
 </div>
-<%}%>
 <script>
   const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
   const hotels = {features: <%- JSON.stringify(hotels) %>};

@@ -5,7 +5,7 @@ const Hotel = require("./models/hotel");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
-    req.flash("error", "you must be signed in");
+    req.flash("error", "You must be signed in");
     return res.redirect("/login");
   }
   next();
