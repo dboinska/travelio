@@ -11,16 +11,27 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/5567926149.js"
+      crossorigin="anonymous"
+    ></script>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
+
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="/stylesheets/stars.css" />
   </head>
-  <body class="d-flex flex-column vh-100">
+  <body class="d-flex flex-column vh-100 bg-dark">
     <%- include('../partials/navbar')%>
-    <main class="container mt-5">
+    <main class="container">
       <%-include('../partials/flash')%> <%-include('../partials/error')%><%-
       body %>
     </main>
