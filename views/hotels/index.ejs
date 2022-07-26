@@ -1,6 +1,7 @@
 <% layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/stylesheets/boilerplate.css" />;
 <link rel="stylesheet" href="/stylesheets/index.css" />
+<link rel="stylesheet" href="/stylesheets/pagination.css" />
 <div class="fullWidth">
   <div id="cluster-map" class="cluster-map mb-5"></div>
 </div>
@@ -49,6 +50,23 @@
     </div>
     <%}%>
   </div>
+</div>
+<div>
+  <ul class="pagination d-flex justify-content-center mt-4">
+    <li class="page-item disabled">
+      <a class="page-link hover-off" href="#" tabindex="-1" aria-disabled="true"
+        >Previous</a
+      >
+    </li>
+    <li class="page-item"><a class="page-link circle" href="#">1</a></li>
+    <li class="page-item active" aria-current="page">
+      <a class="page-link circle" href="#">2</a>
+    </li>
+    <li class="page-item"><a class="page-link circle" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link hover-off" href="#">Next</a>
+    </li>
+  </ul>
 </div>
 <script>
   const mapToken = "<%-process.env.MAPBOX_TOKEN%>";

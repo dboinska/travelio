@@ -6,6 +6,7 @@ body {
   --brinkPink: hsl(339, 99%, 66%);
   --mineShaft: hsl(0, 1%, 15%);
   --white: hsl(0, 0%, 100%);
+  --gallery: hsl(0, 0%, 92%);
 }
 html {
   font-size: calc(15px + 0.390625vw);
