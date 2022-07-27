@@ -3,8 +3,9 @@
   --bs-pagination-active-border-color: #76ff03;
   --bs-pagination-disabled-bg: #191a1a;
   --bs-pagination-active-color: #191a1a;
-  --bs-link-color: #76ff03;
+  --bs-link-color: white;
   --bs-link-hover-color: #59c600;
+  --bs-pagination-focus-bg: #191a1a;
   --bs-pagination-hover-bg: #191a1a;
   --bs-pagination-hover-border-color: #59c600;
 }
