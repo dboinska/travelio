@@ -4,9 +4,28 @@ const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const Hotel = require("../models/hotel");
 
+const ITEMS_PER_PAGE = 12;
+
 module.exports.index = async (req, res) => {
-  const hotels = await Hotel.find({});
-  res.render("hotels/index", { hotels });
+  const PAGE_NUMBER = parseInt(req.query.page || 1);
+
+  console.log({ PAGE_NUMBER });
+  const hotels = await Hotel.find({})
+    .skip(ITEMS_PER_PAGE * PAGE_NUMBER - ITEMS_PER_PAGE)
+    .limit(ITEMS_PER_PAGE)
+    .exec(function (err, hotels) {
+      Hotel.count().exec(function (err, count) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("hotels/index", {
+            hotels: hotels,
+            current: PAGE_NUMBER,
+            pages: Math.ceil(count / ITEMS_PER_PAGE),
+          });
+        }
+      });
+    });
 };
 
 module.exports.newForm = (req, res) => {

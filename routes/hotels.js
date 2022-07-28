@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const hotels = require("../controllers/hotels");
 
 const catchAsync = require("../utils/catchAsync");

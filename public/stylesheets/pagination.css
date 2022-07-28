@@ -1,0 +1,36 @@
+.pagination {
+  --bs-pagination-active-bg: #76ff03;
+  --bs-pagination-active-border-color: #76ff03;
+  --bs-pagination-disabled-bg: #191a1a;
+  --bs-pagination-active-color: #191a1a;
+  --bs-link-color: white;
+  --bs-link-hover-color: #59c600;
+  --bs-pagination-focus-bg: #191a1a;
+  --bs-pagination-hover-bg: #191a1a;
+  --bs-pagination-hover-border-color: #59c600;
+}
+
+.page-link {
+  background-color: #191a1a;
+  border: none;
+  margin: 2px;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  margin: 4px;
+  transition: all 0.3 ease;
+}
+
+.circle:hover {
+  border: 2px solid #59c600;
+}
+
+.page-link.hover-off:hover {
+  background-color: #191a1a;
+}
