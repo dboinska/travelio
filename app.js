@@ -104,7 +104,7 @@ app.use(
         "'self'",
         "blob:",
         "data:",
-        `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`,
+        `*.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`,
         // "*.cloudinary.com/dhnjbnqre/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
         "*.unsplash.com",
       ],
