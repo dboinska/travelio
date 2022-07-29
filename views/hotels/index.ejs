@@ -122,6 +122,6 @@
 </div>
 <script>
   const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
-  const hotels = {features: <%- JSON.stringify(hotels) %>};
+  const hotels = {features: <%- JSON.stringify(allHotels) %>};
 </script>
 <script src="/javascript/clusterMap.js"></script>
