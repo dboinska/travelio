@@ -10,6 +10,9 @@ module.exports.index = async (req, res) => {
   const PAGE_NUMBER = parseInt(req.query.page || 1);
 
   console.log({ PAGE_NUMBER });
+
+  const allHotels = await Hotel.find({});
+
   const hotels = await Hotel.find({})
     .skip(ITEMS_PER_PAGE * PAGE_NUMBER - ITEMS_PER_PAGE)
     .limit(ITEMS_PER_PAGE)
@@ -20,6 +23,7 @@ module.exports.index = async (req, res) => {
         } else {
           res.render("hotels/index", {
             hotels: hotels,
+            allHotels: allHotels,
             current: PAGE_NUMBER,
             pages: Math.ceil(count / ITEMS_PER_PAGE),
           });

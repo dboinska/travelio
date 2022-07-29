@@ -32,7 +32,6 @@ module.exports.login = (req, res) => {
 };
 
 module.exports.logout = (req, res) => {
-  const { username } = req.body;
   req.logout(function (err) {
     if (err) {
       return next(err);

@@ -1,14 +1,14 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+// if (process.env.NODE_ENV !== "production") {
+//   require("dotenv").config();
+// }
 
-console.log(process.env.CLOUDINARY_API_SECRET);
-console.log(process.env.CLOUDINARY_API_KEY);
+require("dotenv").config();
 
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
+const helmet = require("helmet");
 
 const session = require("express-session");
 const flash = require("connect-flash");
@@ -17,6 +17,7 @@ const methodOverride = require("method-override");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+const mongoSanitize = require("express-mongo-sanitize");
 
 const userRoutes = require("./routes/users");
 const hotelRoutes = require("./routes/hotels");
@@ -45,13 +46,16 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(mongoSanitize({ replaceWith: "_" }));
 
 const sessionConfig = {
-  secret: "ddsfdsf",
+  name: "session",
+  secret: "secret",
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
+    // secure: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
@@ -59,6 +63,55 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+
+const scriptSrcUrls = [
+  "*.bootstrapcdn.com",
+  "*.mapbox.com",
+  "*.fontawesome.com",
+  "*.cloudflare.com",
+  "*.jsdelivr.net",
+];
+//This is the array that needs added to
+const styleSrcUrls = [
+  "*.fontawesome.com/",
+  "*.mapbox.com/",
+  "*.googleapis.com",
+  "*.jsdelivr.net",
+  "*.cloudflare.com",
+];
+const connectSrcUrls = ["*.mapbox.com/", "*.fontawesome.com/"];
+const fontSrcUrls = [
+  "*.fontawesome.com",
+  "*.cloudflare.com",
+  "*.googleapis.com",
+];
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      connectSrc: ["'self'", ...connectSrcUrls],
+      "script-src": [
+        "'self'",
+        "'unsafe-inline'",
+        "data:",
+        "localhost",
+        ...scriptSrcUrls,
+      ],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`,
+        // "*.cloudinary.com/dhnjbnqre/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        "*.unsplash.com",
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+    },
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -71,6 +124,7 @@ app.use((req, res, next) => {
   if (!["/login", "/", "register"].includes(req.originalUrl)) {
     req.session.returnTo = req.originalUrl;
   }
+  console.log("req.query" + req.query);
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
