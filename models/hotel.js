@@ -39,6 +39,7 @@ const HotelSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    date: String,
     reviews: [
       {
         type: Schema.Types.ObjectId,

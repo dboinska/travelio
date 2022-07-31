@@ -31,19 +31,19 @@
                 <p class="starability-result" data-rating="5"></p>
               </div>
               <small class="text-muted w-100 text-center"
-                >from <strong><%=hotel.price%>$</strong> per night</small
+                >from <b>$<%=hotel.price%></b> per night</small
               >
             </div>
 
-            <p class="card-text">
+            <div class="card-text d-flex justify-content-center">
               <!-- <small class="text-muted"><%=hotel.description%></small>
             </p> -->
               <a
-                class="btn btn-primary button-blue"
+                class="btn btn-primary button-blue mx-5 mx-md-0 p-2"
                 href="/hotels/<%=hotel._id%>"
                 >View <%=hotel.title%></a
               >
-            </p>
+            </div>
           </div>
         </div>
       </div>
@@ -109,14 +109,6 @@
       <a class="page-link hover-off" href="/hotels?page=<%=pages%>">Last</a>
     </li>
     <% } %>
-    <!-- <li class="page-item active"><a class="page-link circle" href="#">1</a></li>
-    <li class="page-item" aria-current="page">
-      <a class="page-link circle" href="#">2</a>
-    </li>
-    <li class="page-item"><a class="page-link circle" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link hover-off" href="#">Next</a>
-    </li> -->
   </ul>
   <% } %>
 </div>

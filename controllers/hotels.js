@@ -3,6 +3,7 @@ const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const Hotel = require("../models/hotel");
+const { format } = require("date-fns");
 
 const ITEMS_PER_PAGE = 12;
 
@@ -50,6 +51,7 @@ module.exports.createNewHotel = async (req, res, next) => {
     filename: file.filename,
   }));
   hotel.author = req.user._id;
+  hotel.date = format(new Date(), "MM/dd/yyyy h:mm aaa");
   await hotel.save();
   console.log(hotel);
   req.flash("success", "Successfully made a new hotel");

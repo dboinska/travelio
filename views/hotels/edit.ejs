@@ -1,7 +1,8 @@
 <% layout('layouts/boilerplate') %>
-   <div class="row">
-    <h1 class="text-center">Edit Hotel</h1>
-    <div class="col-6 offset-3">
+<link rel="stylesheet" href="/stylesheets/boilerplate.ejs">
+   <div class="row white-card change-page ">
+    <h1 class="text-center mt-3">Edit Hotel</h1>
+    <div class="col-6 offset-3 my-3">
          <form action="/hotels/<%=hotel._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
@@ -20,7 +21,7 @@
       <div class="mb-3 custom-file">
         <input class="form-control" type="file" id="image" name="image" multiple>
         <label for="formFileMultiple" class="form-label" for="image">
-          <p class="form-file-text custom-file-label">Add more image(s)...</p>
+          <p class="form-file-text custom-file-label"><Add></Add more image(s)...></p>
         </label>
       </div>
       <div class="mb-3">
@@ -45,18 +46,22 @@
       </div>
       <div class="mb-3">
         <% hotel.images.forEach(function(img, i) { %>
+         <div> 
           <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="photo">
           <div class="form-check-inline">
             <input type="checkbox" id="image-<%=i%>" name="deleteImgs[]" value="<%=img.filename%>">
           </div>
           <label for="">Delete?</label>
+        </div>
        <% }) %> 
       </div>
-      <div class="mb-3"><button class="btn btn-info" type="submit">Update Hotel</button></div>
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+         <a href="/hotels/<%= hotel._id%>">Back To Hotel</a><button class="btn btn-success button button-blue" type="submit">Update Hotel</button></div>
     </form>
    
-    <a href="/hotels/<%= hotel._id%>">Back To Hotel</a>
+   
     </div>
+    
    </div>
 
 

@@ -1,7 +1,11 @@
 <% layout('layouts/boilerplate') %>
-   <div class="row">
+<link rel="stylesheet" href="/stylesheets/boilerplate.ejs">
+
+
+
+   <div class="row change-page white-card">
     <h1 class="text-center">New Hotel</h1>
-    <div class="col-6 offset-3">
+    <div class="mx-auto col-lg-6 offset-3">
           <form action="/hotels" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
@@ -51,9 +55,11 @@
             correctly completed
         </div>
       </div>
-      <div class="mb-3"><button class="btn btn-success" type="submit">Add Hotel</button></div>
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <a href="/hotels">All hotels</a><button class="btn btn-success button button-blue" type="submit">Add Hotel</button></div>
     </form>
-    <a href="/hotels">All hotels</a>
+    
     </div>
    </div>
+   <script src="/javascript/date.js"></script>
 
