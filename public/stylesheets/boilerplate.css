@@ -1,11 +1,13 @@
 body {
   --cerulean: hsl(192, 100%, 45%);
-  --chartreuse: hsl(93, 100%, 51%);
   --sulu: hsl(93, 86%, 67%);
+  --chartreuse: hsl(93, 100%, 51%);
+  --limeade: hsl(93, 100%, 39%);
   --turbo: hsl(55, 100%, 50%);
   --razzmatazz: hsl(339, 100%, 48%);
   --brinkPink: hsl(339, 99%, 66%);
   --mineShaft: hsl(0, 1%, 15%);
+  --woodSmoke: hsl(180, 2%, 10%);
   --white: hsl(0, 0%, 100%);
   --gallery: hsl(0, 0%, 92%);
 }
@@ -46,7 +48,7 @@ html {
   margin: 0 0.2rem;
 }
 
-h1,
+h1.blue,
 h3.card-title {
   background: linear-gradient(to right, #30cfd0 0%, #0c5eb6 10%);
   -webkit-background-clip: text;
@@ -122,9 +124,14 @@ h3.card-title {
   max-width: 300px;
   position: fixed;
   z-index: 999;
-  margin-top: 2rem;
+  margin: 2rem;
 }
-.alert-danger {
+
+.alert-error {
+  max-width: 100%;
+}
+.alert-danger,
+.alert-error {
   background-color: var(--brinkPink);
 }
 .alert-success {
@@ -143,7 +150,7 @@ b {
   color: var(--razzmatazz);
 }
 .change-page label {
-  color: var(--razzmatazz);
+  color: var(--cerulean);
   font-weight: 600;
 }
 
@@ -151,7 +158,5 @@ b {
   background-color: white;
   border: 2px solid var(--cerulean);
   border-radius: 5px;
-  /* padding: 3rem; */
   margin-top: 1rem;
-  /* margin: 0; */
 }

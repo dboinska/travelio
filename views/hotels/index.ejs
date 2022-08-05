@@ -6,7 +6,7 @@
   <div id="cluster-map" class="cluster-map mb-5"></div>
 </div>
 <div class="d-flex justify-content-between align-items-center">
-  <h1>All Hotels</h1>
+  <h1 class="text-white">All Hotels</h1>
   <a class="text-white text-decoration-none" href="/hotels/new"
     >Add Hotel<i class="chartreuse fa-solid fa-circle-plus fa-beat"></i
   ></a>
@@ -28,7 +28,10 @@
                 <%= hotel.title %>
               </h5>
               <div class="stars">
-                <p class="starability-result" data-rating="5"></p>
+                <p
+                  class="starability-result"
+                  data-rating="<%=hotel.meanRate%>"
+                ></p>
               </div>
               <small class="text-muted w-100 text-center"
                 >from <b>$<%=hotel.price%></b> per night</small

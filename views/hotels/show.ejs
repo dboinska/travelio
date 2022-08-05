@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/boilerplate.css" />
 <link rel="stylesheet" href="/stylesheets/show.css" />
 
 <div class="white-card p-0">
@@ -37,10 +38,9 @@
       <img src="<%= img.url%>" class="card-img-top" alt="..." />
       <% } %> -->
   </div>
-  <div class="d-flex justify-content-between row m-3">
+  <div class="d-flex justify-content-between row m-4">
     <div class="card-body col-lg-6">
       <h3 class="card-title mb-3"><%= hotel.title%></h3>
-
       <div class="d-flex justify-content-between mb-3">
         <h6 class="card-title"><%= hotel.location%></h6>
         <h6>from <b>$<%= hotel.price%> </b>per night</h6>
@@ -50,8 +50,8 @@
         <li class="list-group-item">
           Submitted by <%= hotel.author.username%>
         </li>
-        <% if(hotel.date){ %>
-        <li class="list-group-item"><%=hotel.date%></li>
+        <% if(hotel.formattedDate){ %>
+        <li class="list-group-item"><%=hotel.formattedDate%></li>
         <% } else { %>
         <li class="list-group-item">2 days ago</li>
         <% } %>
@@ -81,8 +81,9 @@
       <div id="map" class="map"></div>
     </div>
   </div>
-  <div class="px-3 m-3 max-width-400">
+  <div class="m-4 max-width-400">
     <% if(currentUser && (currentUser.username !== hotel.author.username)) {%>
+
     <h3 class="card-title">Leave a Review</h3>
     <form
       action="/hotels/<%=hotel._id%>/reviews"
@@ -155,23 +156,35 @@
         <button class="btn btn-success button button-blue">Submit</button>
       </div>
     </form>
+    <% } if(!currentUser) {%>
+    <h3 class="card-title">Leave a Review</h3>
+    <a
+      href="/login?returnTo=/hotels/<%=hotel.id%>"
+      class="btn text-white my-3 button-blue"
+      >Login to add a review</a
+    >
     <% } %>
   </div>
-  <div class="p-4 pt-0">
+  <div class="m-4">
     <h3 class="color-pink mb-3">All Reviews</h3>
     <% if(hotel.reviews.length>0) {%> <% for(let review of hotel.reviews) {%>
 
-    <div class="card m-3">
+    <div class="card m-4">
       <div class="card-body">
         <p class="starability-result" data-rating="<%=review.rating%>"></p>
 
         <p class="card-text"><%=review.text%></p>
-        <h6 class="text-muted">~<%=review.author.username%></h6>
+
+        <div class="d-flex align-items-center">
+          <span class="text-muted mx-2">~<%=review.author.username%> </span>
+          <span class="text-muted"> <%=review.formattedDate%> </span>
+        </div>
 
         <% if(currentUser && review.author.equals(currentUser._id)) {%>
         <form
           action="/hotels/<%=hotel._id%>/reviews/<%=review._id%>?_method=DELETE"
           method="POST"
+          name="deleteForm"
         >
           <div class="d-flex justify-content-end">
             <button class="btn btn-sm btn-danger button button-pink bottom">
@@ -194,4 +207,5 @@
       const hotel = <%- JSON.stringify(hotel) %>;
   </script>
   <script src="/javascript/showPageMap.js"></script>
+  <script src="/javascript/reviewRemove.js"></script>
 </div>

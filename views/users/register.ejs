@@ -1,26 +1,35 @@
 <% layout('layouts/boilerplate') %>
 <div class="container container-register mt-3">
-  <h1>Register</h1>
+  <h1 class="blue">Register</h1>
 <form action="/register" method="POST" class="validated-form" novalidate>
     <div class="mb-3">
         <label class="form-label"  for="username">Username</label>
         <input  class="form-control"  type="text" id="username" name="username" required></input>
          <div class="valid-feedback">
-            correctly completed
+            Correctly completed
+        </div>
+          <div class="invalid-feedback">
+            Incorrectly completed
         </div>
       </div>
        <div class="mb-3">
         <label class="form-label"  for="email">Email</label>
         <input  class="form-control"  type="email" id="email" name="email" required></input>
          <div class="valid-feedback">
-            correctly completed
+            Correctly completed
+        </div>
+          <div class="invalid-feedback">
+            Incorrectly completed
         </div>
       </div>
        <div class="mb-3">
         <label class="form-label"  for="password">Password</label>
         <input  class="form-control"  type="password" id="password" name="password" required></input>
          <div class="valid-feedback">
-            correctly completed
+            Correctly completed
+        </div>
+          <div class="invalid-feedback">
+            Incorrectly completed
         </div>
       </div>
      <div class="text-end">
