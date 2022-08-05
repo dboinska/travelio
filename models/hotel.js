@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-//  "https://res.cloudinary.com/dhnjbnqre/image/upload/w_300/v1658357341/Travelio/d765cvnbm20ebmjfwpbw.jpg";
-
 const Review = require("./review");
 
 const ImageSchema = new Schema({
@@ -39,6 +37,7 @@ const HotelSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    date: Date,
     reviews: [
       {
         type: Schema.Types.ObjectId,

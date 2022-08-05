@@ -5,7 +5,6 @@ const Hotel = require("../models/hotel");
 
 mongoose.connect("mongodb://127.0.0.1:27017/travelio", {
   useNewUrlParser: true,
-  // useCreateIndex: true, // mongod --port 27017 --dbpath C:\mongodb\data\db
   useUnifiedTopology: true,
 });
 const db = mongoose.connection;
@@ -50,6 +49,7 @@ const seedDB = async () => {
           filename: "Travelio/t6ryhturpyh7nj9ca7oz",
         },
       ],
+      date: new Date(),
     });
     await hotel.save();
   }

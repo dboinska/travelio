@@ -12,7 +12,6 @@ module.exports.isLoggedIn = (req, res, next) => {
 };
 
 module.exports.validateHotel = (req, res, next) => {
-  console.log(req.body);
   const { error } = hotelSchema.validate(req.body.hotel);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
@@ -51,13 +50,18 @@ module.exports.verifyReviewAuthor = async (req, res, next) => {
 };
 
 module.exports.validateReview = (req, res, next) => {
-  console.log(req.body);
   const { error } = reviewSchema.validate(req.body);
-  console.log(error);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);
   } else {
     next();
   }
+};
+
+module.exports.checkReturnTo = (req, res, next) => {
+  if (req.session.returnTo) {
+    res.locals.returnTo = req.session.returnTo;
+  }
+  next();
 };

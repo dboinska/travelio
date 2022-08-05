@@ -12,11 +12,8 @@ const {
 const multer = require("multer");
 const { storage } = require("../cloudinary");
 const upload = multer({ storage });
-const Hotel = require("../models/hotel");
 
 router.get("/premiumHotel", (req, res) => {
-  console.log(req);
-  console.log(`request date: ${req.requestTime}`);
   res.send("access");
 });
 
@@ -33,14 +30,6 @@ router
     validateHotel,
     catchAsync(hotels.createNewHotel)
   );
-// .post(upload.array("image"), (req, res) => {
-//   // res.send(req.body, req.file);
-
-//   console.log(req.body);
-//   console.log(req.files);
-//   res.status(200).send(req.files);
-//   // res.send("it worked");
-// });
 
 router.get("/new", isLoggedIn, hotels.newForm);
 

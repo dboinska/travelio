@@ -1,17 +1,17 @@
 .pagination {
-  --bs-pagination-active-bg: #76ff03;
-  --bs-pagination-active-border-color: #76ff03;
-  --bs-pagination-disabled-bg: #191a1a;
-  --bs-pagination-active-color: #191a1a;
-  --bs-link-color: white;
-  --bs-link-hover-color: #59c600;
-  --bs-pagination-focus-bg: #191a1a;
-  --bs-pagination-hover-bg: #191a1a;
-  --bs-pagination-hover-border-color: #59c600;
+  --bs-pagination-active-bg: var(--chartreuse);
+  --bs-pagination-active-border-color: var(--chartreuse);
+  --bs-pagination-disabled-bg: var(--woodSmoke);
+  --bs-pagination-active-color: var(--woodSmoke);
+  --bs-link-color: var(--white);
+  --bs-link-hover-color: var(--limeade);
+  --bs-pagination-focus-bg: var(--woodSmoke);
+  --bs-pagination-hover-bg: var(--woodSmoke);
+  --bs-pagination-hover-border-color: var(--limeade);
 }
 
 .page-link {
-  background-color: #191a1a;
+  background-color: var(--woodSmoke);
   border: none;
   margin: 2px;
 }
@@ -28,9 +28,9 @@
 }
 
 .circle:hover {
-  border: 2px solid #59c600;
+  border: 2px solid var(--limeade);
 }
 
 .page-link.hover-off:hover {
-  background-color: #191a1a;
+  background-color: var(--woodSmoke);
 }

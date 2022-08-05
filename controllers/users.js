@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const { register } = require("../models/user");
 
 module.exports.renderRegister = (req, res) => {
   res.render("users/register");
@@ -22,13 +21,17 @@ module.exports.registerUser = async (req, res) => {
 };
 
 module.exports.renderLogin = (req, res) => {
+  if (req.query.returnTo) {
+    req.session.returnTo = req.query.returnTo;
+  }
   res.render("users/login");
 };
 module.exports.login = (req, res) => {
   const { username } = req.body;
   req.flash("success", `Welcome back, ${username}`);
-  delete req.session.returnTo;
-  res.redirect("/hotels");
+  const redirectUrl = res.locals.returnTo || "/hotels";
+
+  res.redirect(redirectUrl);
 };
 
 module.exports.logout = (req, res) => {

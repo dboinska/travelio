@@ -1,10 +1,13 @@
 body {
   --cerulean: hsl(192, 100%, 45%);
-  --chartreuse: hsl(93, 100%, 51%);
   --sulu: hsl(93, 86%, 67%);
+  --chartreuse: hsl(93, 100%, 51%);
+  --limeade: hsl(93, 100%, 39%);
+  --turbo: hsl(55, 100%, 50%);
   --razzmatazz: hsl(339, 100%, 48%);
   --brinkPink: hsl(339, 99%, 66%);
   --mineShaft: hsl(0, 1%, 15%);
+  --woodSmoke: hsl(180, 2%, 10%);
   --white: hsl(0, 0%, 100%);
   --gallery: hsl(0, 0%, 92%);
 }
@@ -45,11 +48,16 @@ html {
   margin: 0 0.2rem;
 }
 
-h1 {
+h1.blue,
+h3.card-title {
   background: linear-gradient(to right, #30cfd0 0%, #0c5eb6 10%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 4rem;
+}
+
+h3.card-title {
+  line-height: 1;
 }
 
 .container-register {
@@ -62,10 +70,10 @@ h1 {
 }
 
 .button {
-  margin: 1rem;
-  padding: 0.6rem;
-  font-size: 1.125rem;
-  letter-spacing: 0.1rem;
+  margin: 0.2rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
   font-weight: 600;
   border: 0;
   box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.2);
@@ -91,7 +99,9 @@ h1 {
 }
 
 .gradient:hover,
-.button-blue:hover {
+.button-blue:hover,
+.button-pink:hover,
+.button-yellow:hover {
   background: rgb(16, 26, 37);
 }
 
@@ -105,17 +115,48 @@ h1 {
 }
 
 .map {
-  width: 100%;
+  width: 400px;
   height: 300px;
+  border: 2px solid var(--cerulean);
+  border-radius: 5px;
 }
 .alert {
   max-width: 300px;
-  position: absolute;
+  position: fixed;
   z-index: 999;
+  margin: 2rem;
 }
-.alert-danger {
+
+.alert-error {
+  max-width: 100%;
+}
+.alert-danger,
+.alert-error {
   background-color: var(--brinkPink);
 }
 .alert-success {
   background-color: var(--sulu);
+}
+
+.button-pink {
+  background-color: var(--razzmatazz);
+}
+
+.button-yellow {
+  background-color: var(--turbo);
+}
+
+b {
+  color: var(--razzmatazz);
+}
+.change-page label {
+  color: var(--cerulean);
+  font-weight: 600;
+}
+
+.white-card {
+  background-color: white;
+  border: 2px solid var(--cerulean);
+  border-radius: 5px;
+  margin-top: 1rem;
 }

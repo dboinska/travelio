@@ -1,9 +1,11 @@
 const Hotel = require("../models/hotel");
 const Review = require("../models/review");
+
 module.exports.createReview = async (req, res) => {
   const hotel = await Hotel.findById(req.params.id);
   const review = new Review(req.body.review);
   review.author = req.user._id;
+  review.date = new Date();
   hotel.reviews.push(review);
   await review.save();
   await hotel.save();
@@ -13,8 +15,8 @@ module.exports.createReview = async (req, res) => {
 
 module.exports.deleteReview = async (req, res) => {
   const { id, reviewId } = req.params;
-  console.log({ id, reviewId });
   Hotel.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+
   await Review.findByIdAndDelete(reviewId);
   req.flash("success", "Successfully deleted review");
   res.redirect(`/hotels/${id}`);
