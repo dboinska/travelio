@@ -1,7 +1,7 @@
-const User = require("../models/user");
+const User = require('../models/user');
 
 module.exports.renderRegister = (req, res) => {
-  res.render("users/register");
+  res.render('users/register');
 };
 
 module.exports.registerUser = async (req, res) => {
@@ -9,14 +9,14 @@ module.exports.registerUser = async (req, res) => {
     const { email, username, password } = req.body;
     const user = new User({ email, username });
     const registeredUser = await User.register(user, password);
-    req.login(registeredUser, (err) => {
+    req.login(registeredUser, err => {
       if (err) return next(err);
-      req.flash("success", "Welcome to Travelio");
-      res.redirect("/hotels");
+      req.flash('success', 'Welcome to Travelio');
+      res.redirect('/hotels');
     });
   } catch (e) {
-    req.flash("error", e.message);
-    res.redirect("register");
+    req.flash('error', e.message);
+    res.redirect('register');
   }
 };
 
@@ -24,12 +24,12 @@ module.exports.renderLogin = (req, res) => {
   if (req.query.returnTo) {
     req.session.returnTo = req.query.returnTo;
   }
-  res.render("users/login");
+  res.render('users/login');
 };
 module.exports.login = (req, res) => {
   const { username } = req.body;
-  req.flash("success", `Welcome back, ${username}`);
-  const redirectUrl = res.locals.returnTo || "/hotels";
+  req.flash('success', `Welcome back, ${username}`);
+  const redirectUrl = res.locals.returnTo || '/hotels';
 
   res.redirect(redirectUrl);
 };
@@ -39,7 +39,7 @@ module.exports.logout = (req, res) => {
     if (err) {
       return next(err);
     }
-    req.flash("success", "Goodbye!");
-    res.redirect("/hotels");
+    req.flash('success', 'Goodbye!');
+    res.redirect('/hotels');
   });
 };

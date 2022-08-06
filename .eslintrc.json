@@ -1,17 +1,18 @@
 {
     
-  "extends": ["plugin:prettier/recommended"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error"
-    // "arrow-body-style": "off",
-    // "prefer-arrow-callback": "off"
+    "prettier/prettier": "error",
+    
   },
+  
+  
   "parserOptions": {
         "ecmaVersion": "latest"
     },
 
     "env": {
         "es6": true
-    },
+    }
 }

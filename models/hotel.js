@@ -1,15 +1,15 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Review = require("./review");
+const Review = require('./review');
 
 const ImageSchema = new Schema({
   url: String,
   filename: String,
 });
 
-ImageSchema.virtual("thumbnail").get(function () {
-  return this.url.replace("/upload", "/upload/w_200");
+ImageSchema.virtual('thumbnail').get(function () {
+  return this.url.replace('/upload', '/upload/w_200');
 });
 
 const opts = { toJSON: { virtuals: true } };
@@ -20,7 +20,7 @@ const HotelSchema = new Schema(
     geometry: {
       type: {
         type: String,
-        enum: ["Point"],
+        enum: ['Point'],
         required: true,
       },
       coordinates: {
@@ -35,25 +35,25 @@ const HotelSchema = new Schema(
     location: String,
     author: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
     date: Date,
     reviews: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Review",
+        ref: 'Review',
       },
     ],
   },
   opts
 );
 
-HotelSchema.virtual("properties.popUpMarkup").get(function () {
+HotelSchema.virtual('properties.popUpMarkup').get(function () {
   return `<strong><a href="/hotels/${this._id}">${this.title}</a></strong>
   <p>${this.description.substring(0, 20)}...</p>`;
 });
 
-HotelSchema.post("findOneAndDelete", async function (doc) {
+HotelSchema.post('findOneAndDelete', async function (doc) {
   if (doc) {
     await Review.deleteMany({
       _id: {
@@ -63,4 +63,4 @@ HotelSchema.post("findOneAndDelete", async function (doc) {
   }
 });
 
-module.exports = mongoose.model("Hotel", HotelSchema);
+module.exports = mongoose.model('Hotel', HotelSchema);
