@@ -50,9 +50,6 @@ h3 {
   font-size: 0.8rem;
 }
 
-.fw-600 {
-  font-weight: 600;
-}
 .chartreuse {
   color: var(--chartreuse);
   transition: color 0.3 ease;
@@ -68,4 +65,9 @@ i.fa-solid {
   font-size: 24px;
   margin: 0.5rem;
   content: '/f055';
+}
+
+.btn-primary {
+  width: auto;
+  max-width: 200px;
 }

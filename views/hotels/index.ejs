@@ -23,8 +23,8 @@
         </div>
         <div>
           <div class="card-body">
-            <div class="d-flex row justify-content-between">
-              <h2 class="card-title w-100 text-center fw-600 fs-6 mb-0">
+            <div class="text-center px-1">
+              <h2 class="card-title text-center fw-bold mb-0">
                 <%= hotel.title %>
               </h2>
               <h3 class="text-center"><%=hotel.location%></h3>
@@ -34,20 +34,19 @@
                   data-rating="<%=hotel.meanRate%>"
                 ></p>
               </div>
-              <small class="text-muted w-100 text-center"
-                >from <b>$<%=hotel.price%></b> per night</small
+              <small class="text-muted text-center"
+                >From <b>$<%=hotel.price%></b> per night</small
               >
             </div>
             
-            <div class="col-md-8 m-auto">
-              
+
+            <div class="card-text d-flex justify-content-center ">
               <a
-                class="btn button btn-primary button-blue mx-5 mx-md-0"
+                class="btn button btn-primary button-blue p-2"
                 href="/hotels/<%=hotel._id%>"
                 >View <%=hotel.title%></a
               >
             </div>
-            
           </div>
         </div>
       </div>
@@ -88,7 +87,8 @@
     <% } %> <% } %> <% let i=(Number(current) > 5? Number(current)-4:1)%>
     <%if(i!==1){%>
 
-    <li class="page-item disabled"><a>...</a></li>
+    
+    <li class="page-item"><a class="page-link hover-off">...</a></li>
     <%}%> <% for(;i<=(Number(current) + 4)&&i<=pages; i++){%> <% if (i ==
     current) { %>
     <li class="page-item"><a class="page-link active circle"><%= i %></a></li>

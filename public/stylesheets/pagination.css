@@ -10,12 +10,20 @@
   --bs-pagination-hover-border-color: var(--limeade);
 }
 
+ul.pagination {
+  max-width: 90%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
 .page-link {
   background-color: var(--woodSmoke);
   border: none;
   margin: 2px;
 }
 
+.disabled {
+  cursor: not-allowed;
+}
 .circle {
   display: flex;
   justify-content: center;
