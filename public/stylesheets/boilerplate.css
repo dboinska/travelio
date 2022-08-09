@@ -162,6 +162,10 @@ b {
   line-height: 4rem;
 }
 
+h3.color-blue {
+  line-height: 2rem;
+}
+
 .color-pink {
   color: var(--razzmatazz);
 }
