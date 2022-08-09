@@ -5,7 +5,7 @@
   padding: 0;
 }
 .card-body {
-  padding: 1rem 0;
+  padding: 0.6rem 0;
 }
 
 .btn-primary {
@@ -17,10 +17,6 @@
 
 .card-title {
   padding: 0.4rem 0;
-}
-
-h5 {
-  font-size: 1rem;
 }
 
 .img-container {
@@ -45,8 +41,13 @@ h5 {
   margin: 0 auto;
 }
 
-h5 {
+h2 {
   color: var(--mineShaft);
+  font-size: 1rem;
+}
+
+h3 {
+  font-size: 0.8rem;
 }
 
 .fw-600 {
@@ -62,9 +63,9 @@ h5 {
 }
 
 i.fa-solid {
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   font-size: 24px;
   margin: 0.5rem;
-  content: "/f055";
+  content: '/f055';
 }

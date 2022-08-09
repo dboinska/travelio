@@ -1,8 +1,8 @@
 <% layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/stylesheets/boilerplate.ejs">
    <div class="row white-card change-page ">
-    <h1 class="text-center mt-3 blue">Edit Hotel</h1>
     <div class="col-6 offset-3 my-3">
+    <h1 class="my-3 color-blue">Edit Hotel</h1>
          <form action="/hotels/<%=hotel._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>

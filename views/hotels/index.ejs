@@ -21,12 +21,13 @@
           <img class="img-fluid" alt="" src="<%=hotel.images[0].url%>" />
           <% } %>
         </div>
-        <div class="col-md-8">
+        <div>
           <div class="card-body">
             <div class="d-flex row justify-content-between">
-              <h5 class="card-title w-100 text-center fw-600 fs-6">
+              <h2 class="card-title w-100 text-center fw-600 fs-6 mb-0">
                 <%= hotel.title %>
-              </h5>
+              </h2>
+              <h3 class="text-center"><%=hotel.location%></h3>
               <div class="stars">
                 <p
                   class="starability-result"
@@ -37,16 +38,16 @@
                 >from <b>$<%=hotel.price%></b> per night</small
               >
             </div>
-
-            <div class="card-text d-flex justify-content-center">
-              <!-- <small class="text-muted"><%=hotel.description%></small>
-            </p> -->
+            
+            <div class="col-md-8 m-auto">
+              
               <a
-                class="btn btn-primary button-blue mx-5 mx-md-0 p-2"
+                class="btn button btn-primary button-blue mx-5 mx-md-0"
                 href="/hotels/<%=hotel._id%>"
                 >View <%=hotel.title%></a
               >
             </div>
+            
           </div>
         </div>
       </div>

@@ -24,6 +24,7 @@ html {
   background-clip: border-box;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: 600;
 }
 
 .nav-link {
@@ -48,15 +49,7 @@ html {
   margin: 0 0.2rem;
 }
 
-h1.blue,
-h3.card-title {
-  background: linear-gradient(to right, #30cfd0 0%, #0c5eb6 10%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 4rem;
-}
-
-h3.card-title {
+h2.card-title {
   line-height: 1;
 }
 
@@ -159,4 +152,15 @@ b {
   border: 2px solid var(--cerulean);
   border-radius: 5px;
   margin-top: 1rem;
+}
+.color-blue {
+  background: linear-gradient(to right, #30cfd0 0%, #0c5eb6 10%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 4rem;
+}
+
+.color-pink {
+  color: var(--razzmatazz);
 }
