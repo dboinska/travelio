@@ -25,10 +25,6 @@ const hotelRoutes = require('./routes/hotels');
 const reviewRoutes = require('./routes/reviews');
 
 const MongoDBStore = require('connect-mongo');
-const hotels = require('./routes/hotels');
-const reviews = require('./routes/reviews');
-// mongodb://127.0.0.1:27017/travelio
-// process.env.DB_URL;
 const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/travelio';
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
@@ -179,7 +175,7 @@ app.all('*', (req, res, next) => {
   next(new ExpressError('Page not found', 404));
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   const { statusCode = 500 } = err;
   if (!err.message) err.message = 'oh no, something went wrong';
   res.status(statusCode).render('error', { err });

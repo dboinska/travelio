@@ -42,7 +42,7 @@ module.exports.newForm = (req, res) => {
   res.render('hotels/new');
 };
 
-module.exports.createNewHotel = async (req, res, next) => {
+module.exports.createNewHotel = async (req, res) => {
   const geoData = await geocoder
     .forwardGeocode({
       query: req.body.hotel.location,

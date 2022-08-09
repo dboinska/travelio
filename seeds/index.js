@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');
 const Hotel = require('../models/hotel');
-
-mongoose.connect('mongodb://127.0.0.1:27017/travelio', {
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/travelio';
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

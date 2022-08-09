@@ -4,7 +4,7 @@ module.exports.renderRegister = (req, res) => {
   res.render('users/register');
 };
 
-module.exports.registerUser = async (req, res) => {
+module.exports.registerUser = async (req, res, next) => {
   try {
     const { email, username, password } = req.body;
     const user = new User({ email, username });
@@ -34,7 +34,7 @@ module.exports.login = (req, res) => {
   res.redirect(redirectUrl);
 };
 
-module.exports.logout = (req, res) => {
+module.exports.logout = (req, res, next) => {
   req.logout(function (err) {
     if (err) {
       return next(err);
