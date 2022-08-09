@@ -1,11 +1,10 @@
 <% layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/stylesheets/boilerplate.ejs">
 
-
-
    <div class="row change-page white-card">
-    <h1 class="text-center blue">New Hotel</h1>
     <div class="mx-auto col-lg-6 offset-3">
+      
+    <h1 class="color-blue my-3">New Hotel</h1>
           <form action="/hotels" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
@@ -34,15 +33,7 @@
           <p class="form-file-text custom-file-label">Choose image(s)...</p>
         </label>
       </div>
-       <!-- <div class="mb-3">
-        <label class="form-label"  for="image">Image Url</label>
-        <input  class="form-control"  type="text" id="image" name="hotel[image]" required></input>
-         <div class="valid-feedback">
-            Correctly completed
-        </div>
-      </div> -->
-      <div class="mb-3">
-        
+      <div class="mb-3">  
       <label class="form-label" for="price">Hotel Price</label>
       <div class="input-group">
         <div class="input-group-prepend">
@@ -70,7 +61,6 @@
       <div class="mb-3 d-flex justify-content-between align-items-center">
         <a href="/hotels">All hotels</a><button class="btn btn-success button button-blue" type="submit">Add Hotel</button></div>
     </form>
-    
     </div>
    </div>
    <script src="/javascript/date.js"></script>
