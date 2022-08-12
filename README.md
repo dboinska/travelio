@@ -1,6 +1,7 @@
 <p align="center">
-<img src="./public/screenshots/globe-grid.png" alt="drawing" width="120"/>
+  <img src="./public/screenshots/globe-grid.png" alt="drawing" width="120"/>
 </p>
+
 # Travelio - worldwide hotel search app with map
 
 Responsive website that collects information about hotels from around the world.  
