@@ -35,7 +35,7 @@ The inspiration for creating this website was the course I completed, 'The Web D
 
 ### 🔎 Links
 
-Visit the website at https://calm-island-51079.herokuapp.com
+Visit the website at https://travelio-app.fly.dev
 
 ### 🚀 Tech stack
 
