@@ -1,5 +1,5 @@
-module.exports = (hotel) => {
-  const rates = hotel.reviews.map((data) => data.rating);
+module.exports = hotel => {
+  const rates = hotel.reviews.map(data => data.rating);
   if (rates.length > 0) {
     const meanRate = (
       Math.ceil(

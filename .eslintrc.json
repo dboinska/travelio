@@ -1,17 +1,17 @@
 {
     
-  "extends": ["plugin:prettier/recommended"],
-  "plugins": ["prettier"],
-  "rules": {
-    "prettier/prettier": "error"
-    // "arrow-body-style": "off",
-    // "prefer-arrow-callback": "off"
-  },
+  "extends": ["eslint:recommended", "prettier"],  
   "parserOptions": {
         "ecmaVersion": "latest"
     },
 
     "env": {
-        "es6": true
+        "es6": true,
+        "browser": true,
+        "node": true
     },
+    "globals": {
+        "mapboxgl": true,
+        "mapToken": true
+    }
 }

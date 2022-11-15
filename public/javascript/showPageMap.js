@@ -1,12 +1,12 @@
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
-  container: "map",
-  style: "mapbox://styles/mapbox/dark-v10",
+  container: 'map',
+  style: 'mapbox://styles/mapbox/dark-v10',
   center: hotel.geometry.coordinates,
   zoom: 8,
 });
 
-map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
 new mapboxgl.Marker()
   .setLngLat(hotel.geometry.coordinates)

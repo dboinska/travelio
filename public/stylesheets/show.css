@@ -29,11 +29,9 @@ b {
   color: var(--cerulean);
 }
 
-.color-pink {
-  color: var(--razzmatazz);
+h1 {
+  font-size: 1.6rem;
 }
-
-.bottom {
-  position: absolute;
-  bottom: 10%;
+h2 {
+  font-size: 1.2rem;
 }
